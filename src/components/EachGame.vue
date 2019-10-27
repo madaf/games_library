@@ -1,9 +1,15 @@
 <template>
-  <div class="hello">
-    <img id="cover" :src="item.image" />
+  <div class="game">
+    <img
+      :src="item.image"
+      class="game__image"
+    />
     <h2>{{item.name}}</h2>
     <button @click="toggleDetails">View details</button>
-    <div v-show="detailsState">
+    <div
+      v-show="detailsState"
+      class="game__details"
+    >
       <h2>{{item.name}}</h2>
       <p>{{item.genre}}</p>
       <p>{{item.developer}}</p>
@@ -19,19 +25,19 @@ export default {
   data() {
     return {
       detailsState: false
-    };
+    }
   },
   methods: {
     toggleDetails() {
-      this.detailsState = !this.detailsState;
+      this.detailsState = !this.detailsState
     }
   }
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#cover {
+.game__image {
   width: 145px;
   height: 200px;
 }
