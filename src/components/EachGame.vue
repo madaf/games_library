@@ -4,8 +4,10 @@
       :src="item.image"
       class="game__image"
     />
-    <h2>{{item.name}}</h2>
+    <div v-show ="!detailsState">
+      <h2>{{item.name}}</h2>
     <button @click="toggleDetails">View details</button>
+    </div>
     <div
       v-show="detailsState"
       class="game__details"
@@ -14,10 +16,17 @@
       <p>Genre: {{item.genre}}</p>
       <p>Developed by: {{item.developer}}</p>
       <p>Release date: {{item.release}}</p>
-      <button @click= "rateGame">Rate the game</button>
-      <div>
+      <button @click= "rateGame">{{calculatedTotalScore != '0' ? 'Edit rating' : 'Rate game'}}</button>
+      <button @click= "toggleDetails">Back</button>
+      <div v-show = "toggleScore">
+        <p>Graphics: {{graphicsScore}}/20</p>
+        <p>Sound: {{soundScore}}/15</p>
+        <p>Gameplay: {{gameplayScore}}/30</p>
+        <p>Feeling: {{feelingScore}}/20</p>
+        <p>Storyline: {{storylineScore}}/5</p>
+        <p>General impression: {{impressionScore}}/10</p>
         <h3>Total score</h3>
-        <p>{{totalScore}}</p>
+        <p>{{calculatedTotalScore}}</p>
       </div>
       
     </div>
@@ -26,15 +35,16 @@
       <p>Graphics</p>
       <input type="number" v-model ="graphicsScore" name="graphics__score" min="0" max="20">
       <p>Sound</p>
-      <input type="number" name="sound__score" min="0" max="15">
+      <input type="number" v-model ="soundScore" name="sound__score" min="0" max="15">
       <p>Gameplay</p>
-      <input type="number" name="gameplay__score" min="0" max="30">
+      <input type="number" v-model ="gameplayScore" name="gameplay__score" min="0" max="30">
       <p>Feeling</p>
-      <input type="number" name="feeling__score" min="0" max="20">
+      <input type="number" v-model ="feelingScore" name="feeling__score" min="0" max="20">
       <p>Storyline</p>
-      <input type="number" name="storyline__score" min="0" max="5">
+      <input type="number" v-model ="storylineScore" name="storyline__score" min="0" max="5">
       <p>General impression</p>
-      <input type="number" name="impression__score" min="0" max="10">
+      <input type="number" v-model ="impressionScore" name="impression__score" min="0" max="10">
+      <button @click ="checkInputValues">Done</button>
     </div>
   </div>
 </template>
@@ -47,13 +57,13 @@ export default {
     return {
       toggleRate: false,
       detailsState: false,
-      totalScore: null,
-      graphicsScore: null,
-      soundScore: null,
-      gameplayScore: null,
-      feelingScore: null,
-      storylineScore:null,
-      impressionScore:null,
+      toggleScore: false,
+      graphicsScore: 0,
+      soundScore: 0,
+      gameplayScore: 0,
+      feelingScore: 0,
+      storylineScore:0,
+      impressionScore:0,
     }
   },
   methods: {
@@ -62,8 +72,22 @@ export default {
     },
     rateGame(){
       this.toggleRate =!this.toggleRate
+    },
+    checkInputValues(){
+      if(this.graphicsScore == 0 || this.soundScore == 0 || this.gameplayScore == 0 || this.feelingScore == 0 || this.storylineScore == 0 || this.impressionScore == 0){
+        alert("Please fill all the required inputs")
+      } else {
+        this.toggleScore = !this.toggleScore
+        this.toggleRate =!this.toggleRate
+        
+      }
     }
-
+  },
+  computed:{
+    calculatedTotalScore(){
+      const total = parseInt(this.graphicsScore) + parseInt(this.soundScore) + parseInt(this.gameplayScore) + parseInt(this.feelingScore)  + parseInt(this.storylineScore) + parseInt(this.impressionScore)
+return total
+    },   
   }
 }
 </script>

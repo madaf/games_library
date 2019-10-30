@@ -58,10 +58,10 @@ export default {
   data() {
     return {
       newGame: {
-        name: "",
-        genre: "",
+        name: null,
+        genre: null,
         release: null,
-        developer: "",
+        developer: null,
         image: null
       },
       games: [
@@ -91,11 +91,19 @@ export default {
   },
   methods: {
     addGame() {
-      if (!this.isDuplicate) {
-        this.games.push(this.newGame)
+      if (this.newGame.name != null && this.newGame.genre != null && this.newGame.release != null && this.newGame.developer != null) {
+        if(!this.isDuplicate ){
+          this.games.push(this.newGame)
+          this.newGame = {}
+          this.$refs.fileInput.value = ""
+        } else {
+          alert("There is already a game with that name in the library")
+        }
+       
+      } else {
+        alert("Please fill all the inputs")
       }
-      this.newGame = {}
-      this.$refs.fileInput.value = ""
+      
     },
     uploadImage(e) {
       const image = e.target.files[0]
