@@ -6,7 +6,7 @@
     />
     <div v-show ="!detailsState">
       <h2>{{item.name}}</h2>
-    <button @click="toggleDetails">View details</button>
+    <button @click="toggleDetails" class="games__button">View details</button>
     </div>
     <div
       v-show="detailsState"
@@ -16,9 +16,9 @@
       <p>Genre: {{item.genre}}</p>
       <p>Developed by: {{item.developer}}</p>
       <p>Release date: {{item.release}}</p>
-      <button @click= "rateGame">{{calculatedTotalScore != '0' ? 'Edit rating' : 'Rate game'}}</button>
-      <button @click= "toggleDetails">Back</button>
-      <div v-show = "toggleScore">
+      <button @click="rateGame" class="games__button">{{calculatedTotalScore != '0' ? 'Edit rating' : 'Rate game'}}</button>
+      <button @click="toggleDetails" class="games__button">Back</button>
+      <div v-show ="toggleScore">
         <p>Graphics: {{graphicsScore}}/20</p>
         <p>Sound: {{soundScore}}/15</p>
         <p>Gameplay: {{gameplayScore}}/30</p>
@@ -44,7 +44,7 @@
       <input type="number" v-model ="storylineScore" name="storyline__score" min="0" max="5">
       <p>General impression</p>
       <input type="number" v-model ="impressionScore" name="impression__score" min="0" max="10">
-      <button @click ="checkInputValues">Done</button>
+      <button @click="checkInputValues" class="games__button">Done</button>
     </div>
   </div>
 </template>
@@ -94,8 +94,25 @@ return total
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.game {
+  padding-top: 10px;
+}
 .game__image {
   width: 145px;
   height: 200px;
+}
+.games__button  {
+  display: inline-block;
+  padding: 0.7em 1.4em;
+  margin: 0 0.3em 0.3em 0;
+  border: none;
+  border-radius: 0.15em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-weight: 400;
+  color: #FFFFFF;
+  background-color: #3369ff;
+  box-shadow: inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+  text-align: center;
 }
 </style>

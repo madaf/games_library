@@ -1,14 +1,16 @@
 <template>
   <div class="games-list">
     <div class="games-list__form">
-      <label for="name">Name of the game</label>
+      <label for="name" class="games-list__label">Name of the game</label>
       <input
         v-model="newGame.name"
+        class="games-list__input"
         id="name"
       />
-      <label for="game_genre">Select game's genre</label>
+      <label for="game_genre" class="games-list__label">Select game's genre</label>
       <select
         v-model="newGame.genre"
+        class="games-list__select"
         id="game_genre"
         name="genres"
       >
@@ -20,25 +22,28 @@
         <option value="Action & Adventure">Action & adventure</option>
         <option value="Sports & Racing">Sports & Racing</option>
       </select>
-      <label for="release_date">Release date</label>
+      <label for="release_date" class="games-list__label">Release date</label>
       <input
         v-model="newGame.release"
+        class="games-list__input"
         id="release_date"
       />
-      <label for="developer">Developer's name</label>
+      <label for="developer" class="games-list__label">Developer's name</label>
       <input
         v-model="newGame.developer"
+        class="games-list__input"
         id="developer"
       />
-      <label for="game_image">Upload an image</label>
+      <label for="game_image" class="games-list__label">Upload an image</label>
       <input
         type="file"
         accept="image/*"
         @change="uploadImage($event)"
+        class="games-list__input"
         id="game_image"
         ref="fileInput"
       />
-      <button @click="addGame">Add game</button>
+      <button @click="addGame" class="games-list__button">Add game</button>
     </div>
     <EachGame
       v-for="item in games"
@@ -118,9 +123,41 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="scss">
+.games-list {
+  margin: auto;
+  text-align: center;
+}
 .games-list__form {
-  display: grid;
-  grid-template-columns: auto auto;
+  border-bottom: 3px #3369ff solid;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 400px;
+  text-align: left;
+  padding: 20px 0;
+}
+.games-list__input {
+  height: 20px;
+}
+.games-list__select {
+  height: 26px;
+}
+.games-list__label {
+  padding: 12px 0 6px;
+}
+.games-list__button  {
+  display: inline-block;
+  padding: 0.7em 1.4em;
+  margin: 0 0.3em 0.3em 0;
+  border: none;
+  border-radius: 0.15em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-weight: 400;
+  color: #FFFFFF;
+  background-color: #3369ff;
+  box-shadow: inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+  text-align: center;
 }
 </style>
