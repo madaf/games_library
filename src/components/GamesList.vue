@@ -1,12 +1,15 @@
 <template>
   <div class="games-list">
     <div class="games-list__form">
+      <label for="name">Name of the game</label>
       <input
         v-model="newGame.name"
-        placeholder="Name..."
+        id="name"
       />
+      <label for="game_genre">Select game's genre</label>
       <select
         v-model="newGame.genre"
+        id="game_genre"
         name="genres"
       >
         <option value disabled selected>Select genre...</option>
@@ -17,19 +20,22 @@
         <option value="Action & Adventure">Action & adventure</option>
         <option value="Sports & Racing">Sports & Racing</option>
       </select>
+      <label for="release_date">Release date</label>
       <input
         v-model="newGame.release"
-        placeholder="Release date..."
+        id="release_date"
       />
+      <label for="developer">Developer's name</label>
       <input
         v-model="newGame.developer"
-        placeholder="Developer..."
+        id="developer"
       />
+      <label for="game_image">Upload an image</label>
       <input
         type="file"
         accept="image/*"
         @change="uploadImage($event)"
-        id="file-input"
+        id="game_image"
         ref="fileInput"
       />
       <button @click="addGame">Add game</button>
@@ -105,18 +111,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+.games-list__form {
+  display: grid;
+  grid-template-columns: auto auto;
 }
 </style>
